@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages.apps.PagesConfig',
+    'martor',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +120,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 全局环境配置（真和假）
+MARTOR_ENABLE_CONFIGS = {
+    'imgur': 'false',     # to enable/disable imgur uploader/custom uploader.
+    'mention': 'false',   # to enable/disable mention
+    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+    'living': 'true',   # to enable/disable live updates in preview
+}
+
+# 上传本地储存
+import time
+MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
+MARTOR_UPLOAD_URL = '/api/uploader/'  # change to local uploader
+
+MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB
+
+# 文件路径
+MEDIA_URL = '/media/'
+os.path.join(BASE_DIR, 'media')
